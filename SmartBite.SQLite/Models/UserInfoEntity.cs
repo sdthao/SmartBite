@@ -16,13 +16,10 @@ namespace SmartBite.SQLite.Models
 
         public DateTime DateOfBirth { get; set; }
 
-        public UserInfo ToDomain() => new()
+        public UserInfo ToDomain()
         {
-            FirstName = FirstName,
-            LastName = LastName,
-            Email = Email,
-            DateOfBirth = DateOfBirth
-        };
+            return new UserInfo(FirstName, LastName, Email, DateOfBirth);
+        }
 
         public static UserInfoEntity FromDomain(UserInfo domain)
         {
@@ -37,6 +34,7 @@ namespace SmartBite.SQLite.Models
             {
                 FirstName = domain.FirstName,
                 LastName = domain.LastName,
+                Email = domain.Email,
                 DateOfBirth = domain.DateOfBirth
             };
         }

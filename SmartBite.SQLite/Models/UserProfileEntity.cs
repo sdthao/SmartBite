@@ -8,21 +8,20 @@ namespace SmartBite.SQLite.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
+        public int UserInfoId { get; set; }
+
         public string UserName { get; set; }
 
         public string Password { get; set; }
 
         public string UserId { get; set; }
 
-        public int UserInfoId { get; set; }
-
         [Ignore]
         public UserInfoEntity UserInfo { get; set; }
 
         public UserProfile ToDomain()
         {
-            return new UserProfile(
-                UserId, UserName, Password, UserInfo?.ToDomain() ?? new());
+            return new UserProfile(UserId, UserName, Password, UserInfo?.ToDomain());
         }
 
         public static UserProfileEntity FromDomain(UserProfile domain, int userInfoId, UserInfoEntity userInfoEntity)

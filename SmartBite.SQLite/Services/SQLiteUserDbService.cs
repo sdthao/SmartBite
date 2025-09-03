@@ -31,7 +31,8 @@ namespace SmartBite.SQLite.Services
                 _logger.LogInformation($"Searching for user: {username}");
 
                 var existingUser = await _db.Table<UserProfileEntity>()
-                    .FirstOrDefaultAsync(u => u.UserName == username);
+                    .Where(u => u.UserName == username)
+                    .FirstOrDefaultAsync();
 
                 if (existingUser is null)
                 {
@@ -57,7 +58,7 @@ namespace SmartBite.SQLite.Services
             ArgumentNullException.ThrowIfNull(profile);
 
             try
-            {
+            {  
                 _logger.LogInformation($"Adding user: {profile.UserName}");
 
                 var userInfoEntity = UserInfoEntity.FromDomain(profile.UserInfo);
@@ -90,7 +91,8 @@ namespace SmartBite.SQLite.Services
                 _logger.LogInformation($"Attempting login for user: {username}");
 
                 var profileEntity = await _db.Table<UserProfileEntity>()
-                    .FirstOrDefaultAsync(u => u.UserName == username && u.Password == password);
+                    .Where(u => u.UserName == username && u.Password == password)
+                    .FirstOrDefaultAsync();
 
                 if (profileEntity == null)
                     return Result.Failure<UserProfile?>("Username or password is incorrect.");
