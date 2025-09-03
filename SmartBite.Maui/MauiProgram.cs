@@ -6,7 +6,7 @@ using NLog;
 using NLog.Extensions.Logging;
 using SmartBite.Maui.ViewModels;
 using SmartBite.Maui.Views;
-using SmartBite.Services;
+using SmartBite.Maui.Models;
 using SmartBite.SQLite.Extensions;
 using Syncfusion.Licensing;
 using Syncfusion.Maui.Core.Hosting;
@@ -48,9 +48,8 @@ namespace SmartBite.Maui
 
             RegisterServices(builder.Services);
 
-            LogManager.Setup().LoadConfigurationFromFile("nlog.config");
             builder.Logging.ClearProviders();
-            builder.Logging.AddNLog();
+            //builder.Logging.AddNLog("nlog.config");
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -67,7 +66,7 @@ namespace SmartBite.Maui
 
             services.AddSingleton<UserContext>();
 
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MainViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterUserViewModel>();
 

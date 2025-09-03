@@ -1,5 +1,6 @@
 ﻿using SmartBite.Services;
 using SmartBite.Models.User;
+using SmartBite.Maui.Models;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
@@ -13,7 +14,8 @@ namespace SmartBite.Maui.ViewModels
 
         private readonly ILogger<RegisterUserViewModel> _logger;
 
-        private readonly UserContext _userContext;
+        [ObservableProperty]
+        private UserContext _userContext;
 
         [ObservableProperty]
         private string username;
@@ -80,13 +82,7 @@ namespace SmartBite.Maui.ViewModels
                     return;
                 }
 
-                var userInfo = new UserInfo
-                {
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Email = Email,
-                    DateOfBirth = DateOfBirth
-                };
+                var userInfo = new UserInfo(FirstName, LastName, Email, DateOfBirth);
 
                 var existingUser = await _databaseService.FindUserAsync(Username);
 

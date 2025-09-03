@@ -13,10 +13,10 @@
             Routing.RegisterRoute("main", typeof(MainPage));
             Routing.RegisterRoute("register", typeof(Views.RegisterUserView));
 
-            Dispatcher.Dispatch(async () =>
-            {
-                await GoToAsync("login");
-            });
+            //Dispatcher.Dispatch(async () =>
+            //{
+            //    await GoToAsync("login");
+            //});
         }
     }
 }
