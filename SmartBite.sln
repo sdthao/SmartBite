@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBite", "SmartBite\SmartBite.csproj", "{62B362BC-1612-4BA8-BA29-710726F7DA92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBite.Maui", "SmartBite.Maui\SmartBite.Maui.csproj", "{1BD6FF15-5CC5-4715-A96F-ED2F704248B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBite.SQLite", "SmartBite.SQLite\SmartBite.SQLite.csproj", "{5C07F790-1EE9-48C1-AE27-DA12720411C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.SmartBite.SQLite", "Test.SmartBite.SQLite\Test.SmartBite.SQLite.csproj", "{2BF23F69-7225-609D-67D7-179BAB320D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{5C07F790-1EE9-48C1-AE27-DA12720411C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C07F790-1EE9-48C1-AE27-DA12720411C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C07F790-1EE9-48C1-AE27-DA12720411C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF23F69-7225-609D-67D7-179BAB320D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF23F69-7225-609D-67D7-179BAB320D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF23F69-7225-609D-67D7-179BAB320D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF23F69-7225-609D-67D7-179BAB320D22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
