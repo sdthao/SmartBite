@@ -129,10 +129,6 @@ namespace SmartBite.SQLite.Services
                     return Result.Failure<UserProfile>("Username or password is incorrect.");
                 }
 
-                profileEntity = await _db.Table<UserProfileEntity>()
-                    .Where(ui => ui.UserId == profileEntity.UserId)
-                    .FirstOrDefaultAsync();
-
                 var map = _userProfileEntityMapper.Map(profileEntity);
 
                 if (map.Success == false)
