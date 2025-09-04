@@ -50,7 +50,7 @@ namespace SmartBite.Maui
             RegisterServices(builder.Services);
 
             builder.Logging.ClearProviders();
-            //builder.Logging.AddNLog("nlog.config");
+            builder.Logging.AddNLog("nlog.config");
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -71,12 +71,21 @@ namespace SmartBite.Maui
             services.AddTransient<MainViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterUserViewModel>();
+            services.AddTransient<EditFoodItemsViewModel>();
+            //services.AddTransient<OptionsViewModel>();
+            //services.AddTransient<JournalViewModel>();
+            //services.AddTransient<CameraViewModel>();
+            //services.AddTransient<AIToolViewModel>();
 
 
             services.AddTransient<MainPage>();
             services.AddTransient<LoginView>();
             services.AddTransient<RegisterUserView>();
-            
+            services.AddTransient<EditFoodItemsView>();
+            services.AddTransient<OptionsView>();
+            services.AddTransient<UserJournalView>();
+            services.AddTransient<CameraView>();
+            services.AddTransient<AIToolView>();
         }
     }
 }

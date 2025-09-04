@@ -14,7 +14,7 @@
              x:Class="SmartBite.Maui.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="30,0" Spacing="25">
+        <VerticalStackLayout Padding="30" Spacing="25">
 
             <StackLayout Padding="15,0, 15, 0" Spacing="10">
                 <!-- Top Section with Avatar, Name, and Settings -->

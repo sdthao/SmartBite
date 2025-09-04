@@ -29,7 +29,7 @@ namespace SmartBite.Maui.ViewModels
         private bool isDatePickerOpen;
 
         [ObservableProperty]
-        private UserContext _userContext;
+        private UserContext userContext;
 
         [ObservableProperty]
         private ObservableCollection<FoodItem> foodItems;
@@ -74,6 +74,8 @@ namespace SmartBite.Maui.ViewModels
 
             GreetingMessage = $"Hello, {User.UserInfo.FirstName}";
 
+            SelectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+
             Initialize();
         }
 
@@ -82,8 +84,6 @@ namespace SmartBite.Maui.ViewModels
             try
             {
                 _logger.LogInformation("Initializing...");
-
-                SelectedDate = DateTime.Now.ToString("yyyy-MM-dd");
 
                 _ = Task.Run(async () =>
                 {

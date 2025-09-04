@@ -3,10 +3,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartBite.Maui.Views.EditFoodItemsView"
              Title="EditFoodItemsView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Edit Food Items"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="15">
+            <Label Text="Add Food Item" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <Entry Placeholder="Food Name"
+                   Text="{Binding FoodName}" />
+
+            <Label Text="Calories:" />
+            <Grid ColumnDefinitions="7*, 3*" 
+                  ColumnSpacing="10"
+                  HorizontalOptions="FillAndExpand">
+                <Entry Grid.Column="0"
+                       Placeholder="Calories"
+                       Keyboard="Numeric"
+                       Text="{Binding Calories}" />
+
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding CalorieScales}" 
+                        SelectedItem="{Binding SelectedCalorieScale}" />
+            </Grid>
+
+            <Label Text="Weight:" />
+            <Grid ColumnDefinitions="7*, 3*" 
+                  ColumnSpacing="10"
+                  HorizontalOptions="FillAndExpand">
+                <Entry Grid.Column="0"
+                       Keyboard="Numeric"
+                       Text="{Binding Weight}" />
+
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding WeightScales}" 
+                        SelectedItem="{Binding SelectedWeightScale}" />
+            </Grid>
+
+            <Label Text="Vitamin A:" />
+            <Grid ColumnDefinitions="7*, 3*" 
+                  ColumnSpacing="10"
+                  HorizontalOptions="FillAndExpand">
+                <Entry Grid.Column="0"
+                       Placeholder="Vitamin A"
+                       Keyboard="Numeric"
+                       Text="{Binding VitaminA}" />
+
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding NutrientWeightScales}" 
+                        SelectedItem="{Binding SelectedVitaminAWeightScale}" />
+            </Grid>
+
+            <Label Text="Vitamin C:" />
+            <Grid ColumnDefinitions="7*, 3*" 
+                  ColumnSpacing="10"
+                  HorizontalOptions="FillAndExpand" >
+                <Entry Grid.Column="0"
+                       Placeholder="Vitamin C"
+                       Keyboard="Numeric"
+                       Text="{Binding VitaminC}" />
+
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding NutrientWeightScales}" 
+                        SelectedItem="{Binding SelectedVitaminCWeightScale}" />
+            </Grid>
+
+            <Label Text="Vitamin D:" />
+            <Grid ColumnDefinitions="7*, 3*" 
+                  ColumnSpacing="10"
+                  HorizontalOptions="FillAndExpand">
+                <Entry Grid.Column="0"
+                       Placeholder="Vitamin D"
+                       Keyboard="Numeric"
+                       Text="{Binding VitaminD}" />
+
+                <Picker Grid.Column="1"
+                        ItemsSource="{Binding NutrientWeightScales}" 
+                        SelectedItem="{Binding SelectedVitaminDWeightScale}" />
+            </Grid>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Add" 
+                        WidthRequest="100"
+                        Command="{Binding AddFoodItemCommand}" />
+
+                <Button Text="Cancel"
+                        WidthRequest="100"
+                        Command="{Binding CancelCommand}" 
+                        BackgroundColor="LightGray"
+                        TextColor="Black" />
+            </HorizontalStackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
