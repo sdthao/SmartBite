@@ -1,6 +1,4 @@
-﻿using SmartBite.Common.Measurement;
-
-namespace SmartBite.Common.WeightMeasurement
+﻿namespace SmartBite.Common.WeightMeasurement
 {
     public record Ounce(double Value) : IWeightMeasurement
     {

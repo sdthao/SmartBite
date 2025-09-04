@@ -1,6 +1,4 @@
-﻿using SmartBite.Common.Measurement;
-
-namespace SmartBite.Common.CalorieMeasurement
+﻿namespace SmartBite.Common.CalorieMeasurement
 {
     public record Joule(double Value) : ICalorieMeasurement
     {

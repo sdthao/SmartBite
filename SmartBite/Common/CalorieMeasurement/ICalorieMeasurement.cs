@@ -1,6 +1,6 @@
-﻿using SmartBite.Common.CalorieMeasurement;
+﻿using SmartBite.Common.Measurement;
 
-namespace SmartBite.Common.Measurement
+namespace SmartBite.Common.CalorieMeasurement
 {
     public interface ICalorieMeasurement : IMeasurementScale
     {
