@@ -40,9 +40,16 @@ namespace SmartBite.SQLite.Services
             {
                 _logger.LogInformation($"Retrieving food items for userId: {userId} on date: {date.Date}");
 
-                var items = await _db.Table<FoodItemEntity>()
-                                     .Where(f => f.UserId == userId && f.Date == date.Date)
+                var allUserFood = await _db.Table<FoodItemEntity>()
+                                     .Where(f => f.UserId == userId)
                                      .ToListAsync();
+
+                var items = allUserFood.Where(f => f.Date.Date == date.Date).ToList();
+
+                // TODO: Need to apply SqliteFunction.Date()
+                //var items = await _db.Table<FoodItemEntity>()
+                //                     .Where(f => f.UserId == userId && f.Date == date.Date)
+                //                     .ToListAsync();
 
                 var foodItems = items
                 .Select(e => _foodItemEntityMapper.Map(e))
