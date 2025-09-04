@@ -14,22 +14,20 @@
              x:Class="SmartBite.Maui.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout Padding="30,0" Spacing="25">
 
             <StackLayout Padding="15,0, 15, 0" Spacing="10">
                 <!-- Top Section with Avatar, Name, and Settings -->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                     <!-- Avatar -->
                     <sfCore:SfAvatarView ContentType="AvatarCharacter"
-                                 AvatarCharacter="Avatar1"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Center"
-                                 Background="#588157"
-                                 WidthRequest="50"
-                                 HeightRequest="50"
-                                 CornerRadius="25" />
+                                         AvatarCharacter="Avatar1"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Background="#588157"
+                                         WidthRequest="50"
+                                         HeightRequest="50"
+                                         CornerRadius="25" />
 
                     <!-- Greeting -->
                     <Label Text="{Binding User.Name.First, StringFormat='Hi, {0}'}"
@@ -52,24 +50,24 @@
                     <!-- Date Picker -->
                     <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                         <sfPicker:SfDatePicker x:Name="DatePicker"
-                                   Mode="Dialog"
-                                   Format="MM_dd_yyyy"
-                                   IsOpen="{Binding IsDatePickerOpen}"
-                                   SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
+                                               Mode="Dialog"
+                                               Format="MM_dd_yyyy"
+                                               IsOpen="{Binding IsDatePickerOpen}"
+                                               SelectedDate="{Binding SelectedDate, Mode=TwoWay}">
                             <sfPicker:SfDatePicker.FooterView>
                                 <sfPicker:PickerFooterView ShowOkButton="True" 
                                                Height="40" />
                             </sfPicker:SfDatePicker.FooterView>
                         </sfPicker:SfDatePicker>
                         <sfButtons:SfButton x:Name="Date"
-                                Text="{Binding SelectedDate}"
-                                TextColor="White"
-                                Background="#252422"
-                                ShowIcon="True"
-                                ImageSource="calendar.png"
-                                ImageAlignment="Right"
-                                ImageSize="25"
-                                Command="{Binding DatePickerOpen}" />
+                                            Text="{Binding SelectedDate}"
+                                            TextColor="White"
+                                            Background="#252422"
+                                            ShowIcon="True"
+                                            ImageSource="calendar.png"
+                                            ImageAlignment="Right"
+                                            ImageSize="25"
+                                            Command="{Binding DatePickerOpen}" />
                     </StackLayout>
                 </StackLayout>
 
@@ -82,8 +80,8 @@
                            HorizontalOptions="FillAndExpand"
                            BackgroundColor="#252422">
                         <sfTabView:SfTabView TabBarPlacement="Bottom" TabBarHeight="20" TabWidthMode="SizeToContent"
-                                 EnableSwiping="True" TabHeaderPadding="220"
-                                 HeaderHorizontalTextAlignment="Center" IndicatorBackground="#FFFCF2">
+                                             EnableSwiping="True" TabHeaderPadding="220"
+                                             HeaderHorizontalTextAlignment="Center" IndicatorBackground="#FFFCF2">
                             <sfTabView:SfTabView.Items>
                                 <!-- Energy Summar -->
                                 <sfTabView:SfTabItem Header="." TextColor="White">
@@ -96,22 +94,22 @@
                                                    FontAttributes="Bold"/>
                                             <Grid Grid.Row="1" ColumnDefinitions="*, *" VerticalOptions="Start">
                                                 <StackLayout Grid.Column="0" Orientation="Vertical" 
-                                                 VerticalOptions="Start" Spacing="-10">
+                                                             VerticalOptions="Start" Spacing="-10">
                                                     <!-- Daily Intake Progress Bar -->
                                                     <sfProgressBar:SfCircularProgressBar Progress="91"
-                                                                             StartAngle="150"
-                                                                             EndAngle="390"
-                                                                             BackgroundColor="#252422"
-                                                                             ProgressFill="#c2e812"
-                                                                             ProgressThickness="20"
-                                                                             ProgressRadiusFactor="10"
-                                                                             ProgressCornerStyle="BothCurve"
-                                                                             TrackThickness="20"
-                                                                             TrackRadiusFactor="10"
-                                                                             TrackCornerStyle="BothCurve"
-                                                                             HorizontalOptions="Center"
-                                                                             VerticalOptions="Center"
-                                                                             HeightRequest="175">
+                                                                                         StartAngle="150"
+                                                                                         EndAngle="390"
+                                                                                         BackgroundColor="#252422"
+                                                                                         ProgressFill="#c2e812"
+                                                                                         ProgressThickness="20"
+                                                                                         ProgressRadiusFactor="10"
+                                                                                         ProgressCornerStyle="BothCurve"
+                                                                                         TrackThickness="20"
+                                                                                         TrackRadiusFactor="10"
+                                                                                         TrackCornerStyle="BothCurve"
+                                                                                         HorizontalOptions="Center"
+                                                                                         VerticalOptions="Center"
+                                                                                         HeightRequest="175">
                                                         <sfProgressBar:SfCircularProgressBar.Content>
                                                             <Grid>
                                                                 <Grid.RowDefinitions>
@@ -119,44 +117,44 @@
                                                                     <RowDefinition />
                                                                 </Grid.RowDefinitions>
                                                                 <Label Text="1820"
-                                                           FontSize="25"
-                                                           FontAttributes="Bold"
-                                                           HorizontalTextAlignment="Center"
-                                                           VerticalTextAlignment="End"/>
+                                                                       FontSize="25"
+                                                                       FontAttributes="Bold"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       VerticalTextAlignment="End"/>
                                                                 <Label Grid.Row="1"
-                                                           FontSize="15"
-                                                           Text="kCal"
-                                                           HorizontalTextAlignment="Center"
-                                                           VerticalTextAlignment="Start"/>
+                                                                       FontSize="15"
+                                                                       Text="kCal"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       VerticalTextAlignment="Start"/>
                                                             </Grid>
                                                         </sfProgressBar:SfCircularProgressBar.Content>
                                                     </sfProgressBar:SfCircularProgressBar>
                                                     <!-- Daily Inake Label -->
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                                         <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=ElectricBolt}"
-                                                   HeightRequest="20"
-                                                   WidthRequest="40" />
+                                                               HeightRequest="20"
+                                                               WidthRequest="40" />
                                                         <Label Text="Daily Intake"
-                                                   FontSize="15" />
+                                                               FontSize="15" />
                                                     </StackLayout>
                                                 </StackLayout>
                                                 <StackLayout Grid.Column="1" Orientation="Vertical" 
-                                                 VerticalOptions="Start" Spacing="-10">
+                                                             VerticalOptions="Start" Spacing="-10">
                                                     <!-- Daily Expenditure Progress Bar -->
                                                     <sfProgressBar:SfCircularProgressBar Progress="75"
-                                                                             StartAngle="150"
-                                                                             EndAngle="390"
-                                                                             BackgroundColor="#252422"
-                                                                             ProgressFill="#eb5e28"
-                                                                             ProgressThickness="20"
-                                                                             ProgressRadiusFactor="10"
-                                                                             ProgressCornerStyle="BothCurve"
-                                                                             TrackThickness="20"
-                                                                             TrackRadiusFactor="10"
-                                                                             TrackCornerStyle="BothCurve"
-                                                                             HorizontalOptions="Center"
-                                                                             VerticalOptions="Center"
-                                                                             HeightRequest="175">
+                                                                                         StartAngle="150"
+                                                                                         EndAngle="390"
+                                                                                         BackgroundColor="#252422"
+                                                                                         ProgressFill="#eb5e28"
+                                                                                         ProgressThickness="20"
+                                                                                         ProgressRadiusFactor="10"
+                                                                                         ProgressCornerStyle="BothCurve"
+                                                                                         TrackThickness="20"
+                                                                                         TrackRadiusFactor="10"
+                                                                                         TrackCornerStyle="BothCurve"
+                                                                                         HorizontalOptions="Center"
+                                                                                         VerticalOptions="Center"
+                                                                                         HeightRequest="175">
                                                         <sfProgressBar:SfCircularProgressBar.Content>
                                                             <Grid>
                                                                 <Grid.RowDefinitions>
@@ -164,25 +162,25 @@
                                                                     <RowDefinition />
                                                                 </Grid.RowDefinitions>
                                                                 <Label Text="400"
-                                                           FontSize="25"
-                                                           FontAttributes="Bold"
-                                                           HorizontalTextAlignment="Center"
-                                                           VerticalTextAlignment="End"/>
+                                                                       FontSize="25"
+                                                                       FontAttributes="Bold"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       VerticalTextAlignment="End"/>
                                                                 <Label Grid.Row="1"
-                                                           FontSize="15"
-                                                           Text="kCal"
-                                                           HorizontalTextAlignment="Center"
-                                                           VerticalTextAlignment="Start"/>
+                                                                       FontSize="15"
+                                                                       Text="kCal"
+                                                                       HorizontalTextAlignment="Center"
+                                                                       VerticalTextAlignment="Start"/>
                                                             </Grid>
                                                         </sfProgressBar:SfCircularProgressBar.Content>
                                                     </sfProgressBar:SfCircularProgressBar>
                                                     <!-- Daily Inake Label -->
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                                         <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=FitnessCenter}"
-                                                   HeightRequest="20"
-                                                   WidthRequest="40" />
+                                                               HeightRequest="20"
+                                                               WidthRequest="40" />
                                                         <Label Text="Daily Expenditure"
-                                                   FontSize="15" />
+                                                               FontSize="15" />
                                                     </StackLayout>
                                                 </StackLayout>
                                             </Grid>
@@ -197,9 +195,9 @@
                                         <Grid RowDefinitions="auto, auto">
                                             <!-- Macro Summary Label -->
                                             <Label Grid.Row="0"
-                                       Text="Macro Summary" 
-                                       FontSize="20"
-                                       FontAttributes="Bold"/>
+                                                   Text="Macro Summary" 
+                                                   FontSize="20"
+                                                   FontAttributes="Bold"/>
                                             <StackLayout Grid.Row="1" Orientation="Vertical" Margin="0, 15" Spacing="15">
                                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -207,11 +205,11 @@
                                                         <Label Text="91%" FontSize="15" HorizontalOptions="EndAndExpand"/>
                                                     </StackLayout>
                                                     <sfProgressBar:SfLinearProgressBar Progress="91"
-                                                                           ProgressFill="#c2e812"
-                                                                           ProgressHeight="10"
-                                                                           ProgressCornerRadius="20"
-                                                                           TrackCornerRadius="20"
-                                                                           TrackHeight="10"/>
+                                                                                       ProgressFill="#c2e812"
+                                                                                       ProgressHeight="10"
+                                                                                       ProgressCornerRadius="20"
+                                                                                       TrackCornerRadius="20"
+                                                                                       TrackHeight="10"/>
                                                 </StackLayout>
                                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -219,11 +217,11 @@
                                                         <Label Text="90%" FontSize="15" HorizontalOptions="EndAndExpand"/>
                                                     </StackLayout>
                                                     <sfProgressBar:SfLinearProgressBar Progress="90"
-                                                                           ProgressFill="#2d728f"
-                                                                           ProgressHeight="10"
-                                                                           ProgressCornerRadius="20"
-                                                                           TrackCornerRadius="20"
-                                                                           TrackHeight="10"/>
+                                                                                       ProgressFill="#2d728f"
+                                                                                       ProgressHeight="10"
+                                                                                       ProgressCornerRadius="20"
+                                                                                       TrackCornerRadius="20"
+                                                                                       TrackHeight="10"/>
                                                 </StackLayout>
                                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -231,11 +229,11 @@
                                                         <Label Text="100%" FontSize="15" HorizontalOptions="EndAndExpand"/>
                                                     </StackLayout>
                                                     <sfProgressBar:SfLinearProgressBar Progress="100"
-                                                                           ProgressFill="#FFC914"
-                                                                           ProgressHeight="10"
-                                                                           ProgressCornerRadius="20"
-                                                                           TrackCornerRadius="20"
-                                                                           TrackHeight="10"/>
+                                                                                       ProgressFill="#FFC914"
+                                                                                       ProgressHeight="10"
+                                                                                       ProgressCornerRadius="20"
+                                                                                       TrackCornerRadius="20"
+                                                                                       TrackHeight="10"/>
                                                 </StackLayout>
                                                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
@@ -243,11 +241,11 @@
                                                         <Label Text="70%" FontSize="15" HorizontalOptions="EndAndExpand"/>
                                                     </StackLayout>
                                                     <sfProgressBar:SfLinearProgressBar Progress="70"
-                                                                           ProgressFill="#6a4c93"
-                                                                           ProgressHeight="10"
-                                                                           ProgressCornerRadius="20"
-                                                                           TrackCornerRadius="20"
-                                                                           TrackHeight="10"/>
+                                                                                       ProgressFill="#6a4c93"
+                                                                                       ProgressHeight="10"
+                                                                                       ProgressCornerRadius="20"
+                                                                                       TrackCornerRadius="20"
+                                                                                       TrackHeight="10"/>
                                                 </StackLayout>
                                             </StackLayout>
                                         </Grid>
@@ -255,19 +253,18 @@
                                 </sfTabView:SfTabItem>
                             </sfTabView:SfTabView.Items>
                         </sfTabView:SfTabView>
-
-
+                        
                     </Frame>
                 </StackLayout>
 
                 <!-- Food Tracking List -->
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Frame Padding="20"
-               CornerRadius="20"
-               HeightRequest="430"
-               VerticalOptions="Center"
-               HorizontalOptions="FillAndExpand"
-               BackgroundColor="#252422">
+                           CornerRadius="20"
+                           HeightRequest="430"
+                           VerticalOptions="Center"
+                           HorizontalOptions="FillAndExpand"
+                           BackgroundColor="#252422">
                         <!--  -->
                         <sfListView:SfListView ItemsSource="{Binding FoodItems}" ItemSpacing="5">
                             <sfListView:SfListView.ItemTemplate>
@@ -276,21 +273,21 @@
                                         <StackLayout VerticalOptions="FillAndExpand">
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="50">
                                                 <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=Fastfood}"
-                                           WidthRequest="25"
-                                           HeightRequest="25"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Center"/>
+                                                       WidthRequest="25"
+                                                       HeightRequest="25"
+                                                       VerticalOptions="Center"
+                                                       HorizontalOptions="Center"/>
                                                 <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                                                     <Label Text="{Binding Name}" FontAttributes="Bold" 
-                                               HorizontalOptions="Start" VerticalOptions="Center"/>
+                                                           HorizontalOptions="Start" VerticalOptions="Center"/>
                                                     <Label Text="{Binding Weight}"
-                                               HorizontalOptions="Start" VerticalOptions="Center"/>
+                                                           HorizontalOptions="Start" VerticalOptions="Center"/>
                                                 </StackLayout>
                                                 <Label Text="{Binding Calories}" FontAttributes="Bold" 
-                                           HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                                                       HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                                             </StackLayout>
                                             <BoxView HeightRequest="1" BackgroundColor="#FFFCF2"
-                                         HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                                                     HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
                                         </StackLayout>
                                     </Grid>
                                 </DataTemplate>
@@ -304,65 +301,62 @@
             <!-- Footer -->
             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand">
                 <Frame Padding="10"
-           HeightRequest="80"
-           CornerRadius="10"
-           BackgroundColor="#252422"
-           HorizontalOptions="FillAndExpand"
-           VerticalOptions="End">
+                       HeightRequest="80"
+                       CornerRadius="10"
+                       BackgroundColor="#252422"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="End">
                     <StackLayout Orientation="Horizontal" 
-                     HorizontalOptions="FillAndExpand" 
-                     VerticalOptions="FillAndExpand" Spacing="0">
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand" Spacing="0">
 
                         <!-- AI Tool -->
                         <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=Insights}"
-                         Command="{Binding SettingsCommand}"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         BackgroundColor="Transparent">
-                        </ImageButton>
+                                     Command="{Binding AIToolCommand}"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     BackgroundColor="Transparent"/>
 
                         <!-- Journal -->
                         <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=Book}"
-                         Command="{Binding SettingsCommand}"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         BackgroundColor="Transparent"/>
+                                     Command="{Binding JournalCommand}"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     BackgroundColor="Transparent"/>
 
                         <!-- Add Food Item -->
                         <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=AddCircle}"
-                         Command="{Binding AddFooItemCommand}"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         BackgroundColor="Transparent"/>
+                                     Command="{Binding EditFoodCommand}"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     BackgroundColor="Transparent"/>
 
                         <!-- Camera -->
                         <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=CameraAlt}"
-                         Command="{Binding SettingsCommand}"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         BackgroundColor="Transparent"/>
+                                     Command="{Binding CameraCommand}"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     BackgroundColor="Transparent"/>
 
                         <!-- More Options -->
                         <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=MoreHoriz}"
-                         Command="{Binding SettingsCommand}"
-                         HorizontalOptions="CenterAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         HeightRequest="40"
-                         WidthRequest="40"
-                         BackgroundColor="Transparent"/>
+                                     Command="{Binding MoreOptionsCommand}"
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                     BackgroundColor="Transparent"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>
-
-
         </VerticalStackLayout>
     </ScrollView>
 

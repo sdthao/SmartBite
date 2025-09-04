@@ -11,6 +11,7 @@ using SmartBite.SQLite.Extensions;
 using Syncfusion.Licensing;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
+using SmartBite.Extensions;
 
 namespace SmartBite.Maui
 {
@@ -62,6 +63,7 @@ namespace SmartBite.Maui
         {
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "smartbiteusers.db");
 
+            services.AddCore();
             services.AddSQLite(dbPath);
 
             services.AddSingleton<UserContext>();

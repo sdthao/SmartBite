@@ -1,13 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.Logging;
-using SmartBite.Common.CalorieMeasurement;
-using SmartBite.Common.Measurement;
-using SmartBite.Common.WeightMeasurement;
+﻿using SmartBite.Services;
 using SmartBite.Maui.Models;
 using SmartBite.Models.Food;
 using SmartBite.Models.User;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SmartBite.Maui.ViewModels
 {
@@ -15,6 +13,9 @@ namespace SmartBite.Maui.ViewModels
     {
         private readonly ILogger<MainViewModel> _logger;
 
+        private readonly IFoodDbService _foodDbService;
+
+        #region Binded Properties
         [ObservableProperty]
         private UserProfile user;
 
@@ -33,71 +34,79 @@ namespace SmartBite.Maui.ViewModels
         [ObservableProperty]
         private ObservableCollection<FoodItem> foodItems;
 
-        public MainViewModel(ILogger<MainViewModel> logger, UserContext user)
+        #endregion
+
+        #region Commands
+        [RelayCommand]
+        private void DatePickerOpen() => IsDatePickerOpen = true;
+
+        [RelayCommand]
+        private void DatePickerClose() => IsDatePickerOpen = false;
+
+        [RelayCommand]
+        private async Task MoreOptions() => await Shell.Current.GoToAsync($"options");
+
+        [RelayCommand]
+        private async Task Journal() => await Shell.Current.GoToAsync($"journal");
+
+        [RelayCommand]
+        private async Task EditFood() => await Shell.Current.GoToAsync($"editfood");
+
+        [RelayCommand]
+        private async Task Camera() => await Shell.Current.GoToAsync($"camera");
+
+        [RelayCommand]
+        private async Task AITool() => await Shell.Current.GoToAsync($"aitool");
+        
+        #endregion
+
+        public MainViewModel(ILogger<MainViewModel> logger, IFoodDbService foodDbService, UserContext user)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            User = user.CurrentUser;
+            _foodDbService = foodDbService ?? throw new ArgumentNullException(nameof(foodDbService));
 
-            UserContext = user;
+            UserContext = user ?? throw new ArgumentNullException(nameof(user));
+
+            User = user.CurrentUser ?? throw new ArgumentNullException(nameof(user));
+
             UserContext.PropertyChanged += (s, a) => { GreetingMessage = $"Hello, {User.UserInfo.FirstName}"; };
 
             GreetingMessage = $"Hello, {User.UserInfo.FirstName}";
 
-            GenerateMockFoodList();
+            Initialize();
         }
 
-        [RelayCommand]
-        private async Task Settings()
+        private void Initialize()
         {
-            await Task.Delay(1);
-        }
-
-        [RelayCommand]
-        private async Task DatePickerOpen()
-        {
-            IsDatePickerOpen = true;
-            await Task.Delay(1);
-        }
-
-        [RelayCommand]
-        private async Task DatePickerClose()
-        {
-            IsDatePickerOpen = false;
-            await Task.Delay(1);
-        }
-
-        [RelayCommand]
-        private async Task AddFoodItem(FoodItem foodItem)
-        {
-            FoodItems.Add(foodItem);
-            await Task.Delay(1);
-        }
-
-        [RelayCommand]
-        private async Task RemoveFoodItem(FoodItem foodItem)
-        {
-            if (FoodItems != null && FoodItems.Contains(foodItem))
+            try
             {
-                FoodItems.Remove(foodItem);
-                OnPropertyChanged(nameof(FoodItems));
+                _logger.LogInformation("Initializing...");
+
+                SelectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                _ = Task.Run(async () =>
+                {
+                    var getFoodItems = await _foodDbService.GetFoodsForUserAsync(User.UserId, DateTime.Parse(SelectedDate));
+
+                    if (getFoodItems.Success == false)
+                    {
+                        _logger.LogWarning(getFoodItems.Message);
+
+                        FoodItems = new ObservableCollection<FoodItem>();
+
+                        return;
+                    }
+
+                    FoodItems = new ObservableCollection<FoodItem>(getFoodItems.Value);
+
+                }).ConfigureAwait(false);
             }
-            await Task.Delay(1);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error initializing.");
+            }
         }
-
-        private void GenerateMockFoodList()
-        {
-            FoodItems = new ObservableCollection<FoodItem>();
-            FoodItems.Add(new FoodItem("Apple", Calorie.FromCalories(52), Gram.FromGrams(100), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Yogurt", Calorie.FromCalories(100), Gram.FromGrams(100), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Banana", Calorie.FromCalories(105), Gram.FromGrams(118), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Chicken Breast", Calorie.FromCalories(300), Ounce.FromOunces(16), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Oatmeal", Calorie.FromCalories(147), Gram.FromGrams(234), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Egg", Calorie.FromCalories(72), Gram.FromGrams(50), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Broccoli", Calorie.FromCalories(34), Gram.FromGrams(91), new List<INutrientMeasurement>()));
-            FoodItems.Add(new FoodItem("Salmon", Calorie.FromCalories(400), Ounce.FromOunces(16), new List<INutrientMeasurement>()));
-
-            OnPropertyChanged(nameof(FoodItems));
-        }
+        
     }
 }
