@@ -1,16 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.Logging;
+﻿using SmartBite.Enums;
 using SmartBite.Common;
-using SmartBite.Common.CalorieMeasurement;
-using SmartBite.Common.NutrientMeasurement;
-using SmartBite.Common.WeightMeasurement;
-using SmartBite.Enums;
+using SmartBite.Services;
 using SmartBite.Maui.Models;
 using SmartBite.Models.Food;
-using SmartBite.Models.User;
-using SmartBite.Services;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using SmartBite.Common.WeightMeasurement;
+using SmartBite.Common.CalorieMeasurement;
+using CommunityToolkit.Mvvm.ComponentModel;
+using SmartBite.Common.NutrientMeasurement;
 
 namespace SmartBite.Maui.ViewModels
 {
@@ -26,6 +25,9 @@ namespace SmartBite.Maui.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<FoodItem> _foodItems;
+
+        [ObservableProperty]
+        private bool isBusy;
 
         [ObservableProperty]
         private string errorMessage;
@@ -101,12 +103,21 @@ namespace SmartBite.Maui.ViewModels
         [RelayCommand]
         private async Task AddFoodItem()
         {
+            IsBusy = true;
             ErrorMessage = string.Empty;
 
             try
             {
-                if (ValidateFoodItem() == false)
+                var validate = ValidateFoodItem();
+
+                if (validate.Success == false)
+                {
+                    ErrorMessage = validate.Message;
+
+                    _logger.LogWarning(validate.Message);
+
                     return;
+                }
 
                 var foodItemToAdd = BuildFoodItem();
 
@@ -114,9 +125,9 @@ namespace SmartBite.Maui.ViewModels
 
                 if (result.Success == false)
                 {
-                    _logger.LogWarning(result.Message);
-
                     ErrorMessage = result.Message;
+
+                    _logger.LogWarning(result.Message);
 
                     return;
                 }
@@ -133,75 +144,49 @@ namespace SmartBite.Maui.ViewModels
 
                 _logger.LogError(ex, "Error adding food item.");
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         [RelayCommand]
-        private async Task Cancel()
+        private void CancelFoodEdit()
         {
             ClearFoodItem();
+        }
 
+        [RelayCommand]
+        private async Task Back()
+        {
             await Shell.Current.GoToAsync("main");
         }
 
         #endregion
 
-        private bool ValidateFoodItem()
+        #region Helpers
+
+        private IResult ValidateFoodItem()
         {
             if (string.IsNullOrWhiteSpace(FoodName))
-            {
-                ErrorMessage = "Food name cannot be empty.";
-
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
+                return Result.Failure("Food name cannot be empty.");
 
             if (string.IsNullOrWhiteSpace(SelectedCalorieScale))
-            {
-                ErrorMessage = "Calorie scale cannot be empty.";
-
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
+                return Result.Failure("Calorie scale cannot be empty.");
 
             if (string.IsNullOrWhiteSpace(SelectedWeightScale))
-            {
-                ErrorMessage = "Weight scale cannot be empty";
-
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
+                return Result.Failure("Weight scale cannot be empty.");
 
             if (string.IsNullOrWhiteSpace(SelectedVitaminAWeightScale))
-            {
-                ErrorMessage = "Vitamin A weight scale cannot be empty";
-
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
+                return Result.Failure("Vitamin A weight scale cannot be empty.");
 
             if (string.IsNullOrWhiteSpace(SelectedVitaminCWeightScale))
-            {
-                ErrorMessage = "Vitamin C weight scale cannot be empty";
-
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
+                return Result.Failure("Vitamin C weight scale cannot be empty.");
 
             if (string.IsNullOrWhiteSpace(SelectedVitaminDWeightScale))
-            {
-                ErrorMessage = "Vitamin D weight scale cannot be empty";
+                return Result.Failure("Vitamin D weight scale cannot be empty.");
 
-                _logger.LogWarning(ErrorMessage);
-
-                return false;
-            }
-
-            return true;
+            return Result.Successful();
         }
 
         private void ClearFoodItem()
@@ -268,5 +253,7 @@ namespace SmartBite.Maui.ViewModels
                 _ => throw new InvalidOperationException($"Unknown weight scale: {scale}")
             };
         }
+
+        #endregion
     }
 }

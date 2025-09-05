@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartBite.Maui.Views.EditFoodItemsView"
-             Title="EditFoodItemsView">
+             xmlns:converters="clr-namespace:SmartBite.Maui.Converters"
+             x:Class="SmartBite.Maui.Views.EditFoodItemsView">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="15">
+            <Label Text="&#x2190;"
+                   FontSize="24"
+                   TextColor="AntiqueWhite">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
             <Label Text="Add Food Item" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
 
             <Entry Placeholder="Food Name"
@@ -80,16 +94,21 @@
                         SelectedItem="{Binding SelectedVitaminDWeightScale}" />
             </Grid>
 
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontAttributes="Italic"
+                   HorizontalTextAlignment="Center" />
+
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Button Text="Add" 
                         WidthRequest="100"
-                        Command="{Binding AddFoodItemCommand}" />
+                        Command="{Binding AddFoodItemCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
 
                 <Button Text="Cancel"
                         WidthRequest="100"
-                        Command="{Binding CancelCommand}" 
-                        BackgroundColor="LightGray"
-                        TextColor="Black" />
+                        Command="{Binding CancelFoodEditCommand}"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
             </HorizontalStackLayout>
             
         </VerticalStackLayout>
