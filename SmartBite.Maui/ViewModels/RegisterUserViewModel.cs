@@ -1,4 +1,5 @@
-﻿using SmartBite.Services;
+﻿using SmartBite.Common;
+using SmartBite.Services;
 using SmartBite.Models.User;
 using SmartBite.Maui.Models;
 using CommunityToolkit.Mvvm.Input;
@@ -22,6 +23,9 @@ namespace SmartBite.Maui.ViewModels
 
         [ObservableProperty]
         private string password;
+
+        [ObservableProperty]
+        private string confirmedPassword;
 
         [ObservableProperty]
         private string firstName;
@@ -58,26 +62,35 @@ namespace SmartBite.Maui.ViewModels
 
             try
             {
-                if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+                var validate = ValidateUserInfo();
+
+                if (validate.Success == false)
                 {
-                    Message = "Username and password are required.";
+                    _logger.LogDebug(validate.Message);
+
+                    Message = validate.Message;
 
                     return;
                 }
 
-                if (!IsPasswordValid(Password))
+                validate = ValidatePassword();
+
+                if (validate.Success == false)
                 {
-                    Message = "Password must be at least 8 characters long, " +
-                        "contain at least one number, " +
-                        "one special character, and " +
-                        "one capital character.";
+                    _logger.LogDebug(validate.Message);
+
+                    Message = validate.Message;
                     
                     return;
                 }
 
-                if (!IsEmailValid(Email))
+                validate = ValidateEmail();
+
+                if (validate.Success == false)
                 {
-                    Message = "Invalid email format.";
+                    _logger.LogDebug(validate.Message);
+
+                    Message = validate.Message;
 
                     return;
                 }
@@ -88,6 +101,8 @@ namespace SmartBite.Maui.ViewModels
 
                 if (existingUser.Success)
                 {
+                    _logger.LogDebug(existingUser.Message);
+
                     Message = $"Username {Username} already exists. Please choose a different username.";
                     
                     return;
@@ -101,6 +116,8 @@ namespace SmartBite.Maui.ViewModels
 
                 if (!result.Success)
                 {
+                    _logger.LogDebug(result.Message);
+
                     Message = "Account creation failed: " + result.Message;
 
                     return;   
@@ -123,30 +140,63 @@ namespace SmartBite.Maui.ViewModels
             }
         }
 
-        private bool IsEmailValid(string email)
+        #region Validators
+
+        private IResult ValidateUserInfo()
         {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
+            if (string.IsNullOrWhiteSpace(FirstName))
+                return Result.Failure("First name cannot be empty.");
+
+            if (string.IsNullOrWhiteSpace(LastName))
+                return Result.Failure("Las name cannot be empty.");
+
+            if (string.IsNullOrWhiteSpace(Username))
+                return Result.Failure("User name cannot be empty.");
+
+            if (string.IsNullOrWhiteSpace(Password))
+                return Result.Failure("Password cannot be empty.");
+
+            return Result.Successful();
+        }
+
+        private IResult ValidateEmail()
+        {
+            if (string.IsNullOrWhiteSpace(Email))
+                return Result.Failure("Email cannot be empty.");
 
             var emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
-            return Regex.IsMatch(email, emailPattern, RegexOptions.IgnoreCase);
+            var match = Regex.IsMatch(Email, emailPattern, RegexOptions.IgnoreCase);
+
+            if (!match)
+                return Result.Failure("Email format is wrong.");
+
+            return Result.Successful();
         }
 
-        private bool IsPasswordValid(string password)
+        private IResult ValidatePassword()
         {
-            if (string.IsNullOrWhiteSpace(password))
-                return false;
+            if (string.IsNullOrWhiteSpace(Password))
+                return Result.Failure("Password cannot be null or empty.");
 
-            if (password.Length < 8)
-                return false;
+            if (Password.Length < 8)
+                return Result.Failure("Password must be longer than 8 characters.");
 
-            var oneCap = password.Any(char.IsUpper);
-            var hasNumber = password.Any(char.IsDigit);
-            var hasSpecial = password.Any(ch => !char.IsLetterOrDigit(ch));
+            if (!Password.Any(char.IsUpper))
+                return Result.Failure("Password must have at least 1 uppercase letter.");
 
-            return hasNumber && hasSpecial && oneCap;
+            if (!Password.Any(char.IsDigit))
+                return Result.Failure("Password must have at least 1 number.");
+
+            if (!Password.Any(ch => !char.IsLetterOrDigit(ch)))
+                return Result.Failure("Password must have at least 1 special character.");
+
+            if (Password != ConfirmedPassword)
+                return Result.Failure("Password and confirmation password must match.");
+
+            return Result.Successful();
         }
 
+        #endregion
     }
 }
