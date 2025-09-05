@@ -37,7 +37,7 @@ namespace SmartBite.Common.Converters
                 case "mg":
                     measurement = new MilliGram(value);
                     break;
-                case "µg":
+                case "mcg":
                     measurement = new MicroGram(value);
                     break;
                 default:
