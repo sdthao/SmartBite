@@ -33,7 +33,7 @@
                    HorizontalTextAlignment="Center" />
 
             <Button Text="Login"
-                    WidthRequest="200"
+                    WidthRequest="100"
                     Command="{Binding LoginCommand}"
                     IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
 

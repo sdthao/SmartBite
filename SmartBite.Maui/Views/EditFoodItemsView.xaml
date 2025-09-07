@@ -10,41 +10,41 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="15">
-            <Label Text="&#x2190;"
-                   FontSize="24"
-                   TextColor="AntiqueWhite">
+    <VerticalStackLayout>
+
+        <VerticalStackLayout Margin="20,0,20,0" Spacing="10">
+            <!-- Back to home page -->
+            <Label Text="&#x2190;" FontSize="24">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding BackCommand}" />
                 </Label.GestureRecognizers>
             </Label>
+            
+            <Label Text="Add Food Item" FontSize="20" 
+                   FontAttributes="Bold" HorizontalOptions="Center" />
 
-            <Label Text="Add Food Item" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
-
+            <!-- Add Food Name -->
             <Entry Placeholder="Food Name"
                    Text="{Binding FoodName}" />
 
+            <!-- Add Food Calories -->
             <Label Text="Calories:" />
-            <Grid ColumnDefinitions="7*, 3*" 
-                  ColumnSpacing="10"
+            <Grid ColumnDefinitions="7*, 3*" ColumnSpacing="10" 
                   HorizontalOptions="FillAndExpand">
-                <Entry Grid.Column="0"
-                       Placeholder="Calories"
-                       Keyboard="Numeric"
-                       Text="{Binding Calories}" />
+                <Entry Grid.Column="0" Placeholder="Calories"
+                       Keyboard="Numeric" Text="{Binding Calories}" />
 
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding CalorieScales}" 
                         SelectedItem="{Binding SelectedCalorieScale}" />
             </Grid>
 
+            <!-- Add Food Weight -->
             <Label Text="Weight:" />
-            <Grid ColumnDefinitions="7*, 3*" 
-                  ColumnSpacing="10"
+            <Grid ColumnDefinitions="7*, 3*"  ColumnSpacing="10"
                   HorizontalOptions="FillAndExpand">
-                <Entry Grid.Column="0"
-                       Keyboard="Numeric"
+                
+                <Entry Grid.Column="0" Keyboard="Numeric"
                        Text="{Binding Weight}" />
 
                 <Picker Grid.Column="1"
@@ -52,14 +52,12 @@
                         SelectedItem="{Binding SelectedWeightScale}" />
             </Grid>
 
+            <!-- Add Food Vitamins -->
             <Label Text="Vitamin A:" />
-            <Grid ColumnDefinitions="7*, 3*" 
-                  ColumnSpacing="10"
+            <Grid ColumnDefinitions="7*, 3*" ColumnSpacing="10"
                   HorizontalOptions="FillAndExpand">
-                <Entry Grid.Column="0"
-                       Placeholder="Vitamin A"
-                       Keyboard="Numeric"
-                       Text="{Binding VitaminA}" />
+                <Entry Grid.Column="0"  Placeholder="Vitamin A"
+                       Keyboard="Numeric" Text="{Binding VitaminA}" />
 
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding NutrientWeightScales}" 
@@ -67,13 +65,10 @@
             </Grid>
 
             <Label Text="Vitamin C:" />
-            <Grid ColumnDefinitions="7*, 3*" 
-                  ColumnSpacing="10"
+            <Grid ColumnDefinitions="7*, 3*" ColumnSpacing="10"
                   HorizontalOptions="FillAndExpand" >
-                <Entry Grid.Column="0"
-                       Placeholder="Vitamin C"
-                       Keyboard="Numeric"
-                       Text="{Binding VitaminC}" />
+                <Entry Grid.Column="0" Placeholder="Vitamin C"
+                       Keyboard="Numeric" Text="{Binding VitaminC}" />
 
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding NutrientWeightScales}" 
@@ -81,36 +76,29 @@
             </Grid>
 
             <Label Text="Vitamin D:" />
-            <Grid ColumnDefinitions="7*, 3*" 
-                  ColumnSpacing="10"
+            <Grid ColumnDefinitions="7*, 3*" ColumnSpacing="10"
                   HorizontalOptions="FillAndExpand">
-                <Entry Grid.Column="0"
-                       Placeholder="Vitamin D"
-                       Keyboard="Numeric"
-                       Text="{Binding VitaminD}" />
+                <Entry Grid.Column="0" Placeholder="Vitamin D"
+                       Keyboard="Numeric" Text="{Binding VitaminD}" />
 
                 <Picker Grid.Column="1"
                         ItemsSource="{Binding NutrientWeightScales}" 
                         SelectedItem="{Binding SelectedVitaminDWeightScale}" />
             </Grid>
 
-            <Label Text="{Binding ErrorMessage}"
-                   TextColor="Red"
-                   FontAttributes="Italic"
-                   HorizontalTextAlignment="Center" />
+            <Label Text="{Binding ErrorMessage}" TextColor="Red"
+                   FontAttributes="Italic" HorizontalTextAlignment="Center" />
 
             <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
-                <Button Text="Add" 
-                        WidthRequest="100"
+                <Button Text="Add" WidthRequest="100"
                         Command="{Binding AddFoodItemCommand}"
                         IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
 
-                <Button Text="Cancel"
-                        WidthRequest="100"
+                <Button Text="Cancel" WidthRequest="100"
                         Command="{Binding CancelFoodEditCommand}"
                         IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
             </HorizontalStackLayout>
             
         </VerticalStackLayout>
-    </ScrollView>
+    </VerticalStackLayout>
 </ContentPage>

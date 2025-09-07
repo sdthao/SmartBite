@@ -1,17 +1,18 @@
 ﻿using MauiIcons.Core;
-using MauiIcons.Material.Outlined;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using NLog;
+using MauiIcons.Material;
+using SmartBite.Extensions;
+using SmartBite.Maui.Views;
+using Syncfusion.Licensing;
+using CommunityToolkit.Maui;
+using SmartBite.Maui.Models;
 using NLog.Extensions.Logging;
 using SmartBite.Maui.ViewModels;
-using SmartBite.Maui.Views;
-using SmartBite.Maui.Models;
+using MauiIcons.Material.Outlined;
 using SmartBite.SQLite.Extensions;
-using Syncfusion.Licensing;
+using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
-using SmartBite.Extensions;
+using Microsoft.Extensions.Configuration;
 
 namespace SmartBite.Maui
 {
@@ -36,6 +37,8 @@ namespace SmartBite.Maui
             }
 
             builder.UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseMaterialMauiIcons()
                 .UseMauiIconsCore(x => { x.SetDefaultIconAutoScaling(true); })
                 .UseMaterialOutlinedMauiIcons()
                 .ConfigureSyncfusionToolkit()

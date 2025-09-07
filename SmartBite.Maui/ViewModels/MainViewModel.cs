@@ -23,26 +23,17 @@ namespace SmartBite.Maui.ViewModels
         private string greetingMessage = string.Empty;
 
         [ObservableProperty]
-        private string selectedDate;
-
-        [ObservableProperty]
-        private bool isDatePickerOpen;
+        private DateTime selectedDate = DateTime.Today;
 
         [ObservableProperty]
         private UserContext userContext;
 
         [ObservableProperty]
-        private ObservableCollection<FoodItem> foodItems;
+        private ObservableCollection<FoodItem> foodItems = new();
 
         #endregion
 
         #region Commands
-        [RelayCommand]
-        private void DatePickerOpen() => IsDatePickerOpen = true;
-
-        [RelayCommand]
-        private void DatePickerClose() => IsDatePickerOpen = false;
-
         [RelayCommand]
         private async Task MoreOptions() => await Shell.Current.GoToAsync($"options");
 
@@ -70,11 +61,7 @@ namespace SmartBite.Maui.ViewModels
 
             User = user.CurrentUser ?? throw new ArgumentNullException(nameof(user));
 
-            UserContext.PropertyChanged += (s, a) => { GreetingMessage = $"Hello, {User.UserInfo.FirstName}"; };
-
             GreetingMessage = $"Hello, {User.UserInfo.FirstName}";
-
-            SelectedDate = DateTime.Now.ToString("yyyy-MM-dd");
 
             Initialize();
         }
@@ -87,13 +74,11 @@ namespace SmartBite.Maui.ViewModels
 
                 _ = Task.Run(async () =>
                 {
-                    var getFoodItems = await _foodDbService.GetFoodsForUserAsync(User.UserId, DateTime.Parse(SelectedDate));
+                    var getFoodItems = await _foodDbService.GetFoodsForUserAsync(User.UserId, SelectedDate);
 
                     if (getFoodItems.Success == false)
                     {
                         _logger.LogWarning(getFoodItems.Message);
-
-                        FoodItems = new ObservableCollection<FoodItem>();
 
                         return;
                     }
