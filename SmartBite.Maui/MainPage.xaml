@@ -81,7 +81,7 @@
                                                     <!-- Daily Inake Label -->
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                                         <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=ElectricBolt}"
-                                                               HeightRequest="15" WidthRequest="40" />
+                                                               HeightRequest="15"  />
                                                         <Label Text="Daily Intake" FontSize="15" />
                                                     </StackLayout>
                                                 </StackLayout>
@@ -114,7 +114,7 @@
                                                     <!-- Daily Inake Label -->
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                                         <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=FitnessCenter}"
-                                                               HeightRequest="15" WidthRequest="40" />
+                                                               HeightRequest="15"  />
                                                         <Label Text="Expenditure" FontSize="15" />
                                                     </StackLayout>
                                                 </StackLayout>
@@ -182,7 +182,7 @@
                 <!-- Food List View -->
                 <ScrollView>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <Frame Padding="20" CornerRadius="20" HeightRequest="350"
+                        <Frame Padding="20" CornerRadius="20" HeightRequest="390"
                                VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                             <CollectionView ItemsSource="{Binding FoodItems}">
                                 <CollectionView.ItemsLayout>
@@ -190,7 +190,7 @@
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark={StaticResource PrimaryLightText}}">
+                                        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
                                             <StackLayout VerticalOptions="FillAndExpand">
                                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="50">
                                                     <Image mi:MauiIcon.Value="{mi:MaterialOutlined Icon=Fastfood, IconColor=#e36414}"
@@ -205,7 +205,8 @@
                                                     <Label Text="{Binding Calories}" FontAttributes="Bold" 
                                                            HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                                                 </StackLayout>
-                                                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                                                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End"
+                                                         BackgroundColor="{AppThemeBinding Light={StaticResource DarkBackground}, Dark={StaticResource LightBackground}}"/>
                                             </StackLayout>
                                         </Grid>
                                     </DataTemplate>
@@ -219,7 +220,7 @@
         </VerticalStackLayout>
 
         <!-- Footer -->
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="20">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
 
             <!-- AI Tool -->
             <ImageButton mi:MauiIcon.Value="{mi:MaterialOutlined Icon=Insights, 
@@ -227,7 +228,7 @@
                          Command="{Binding AIToolCommand}"
                          HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand"
-                         HeightRequest="40" WidthRequest="40"
+                         HeightRequest="30"
                          BackgroundColor="Transparent"/>
 
             <!-- Journal -->
@@ -236,7 +237,7 @@
                          Command="{Binding JournalCommand}"
                          HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand"
-                         HeightRequest="40" WidthRequest="40"
+                         HeightRequest="30" 
                          BackgroundColor="Transparent">
             </ImageButton>
 
@@ -246,7 +247,7 @@
                          Command="{Binding EditFoodCommand}"
                          HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand"
-                         HeightRequest="40" WidthRequest="40"
+                         HeightRequest="30" 
                          BackgroundColor="Transparent"/>
 
             <!-- Camera -->
@@ -255,7 +256,7 @@
                          Command="{Binding CameraCommand}"
                          HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand"
-                         HeightRequest="40" WidthRequest="40"
+                         HeightRequest="30" 
                          BackgroundColor="Transparent"/>
 
             <!-- More Options -->
@@ -264,7 +265,7 @@
                          Command="{Binding MoreOptionsCommand}"
                          HorizontalOptions="CenterAndExpand"
                          VerticalOptions="CenterAndExpand"
-                         HeightRequest="40" WidthRequest="40"
+                         HeightRequest="30" 
                          BackgroundColor="Transparent"/>
         </StackLayout>
     </VerticalStackLayout>
