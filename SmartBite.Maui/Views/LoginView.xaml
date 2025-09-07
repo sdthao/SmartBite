@@ -27,14 +27,15 @@
                    IsPassword="True"
                    ReturnType="Done" />
 
-            <Button Text="Login"
-                    Command="{Binding LoginCommand}"
-                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
-
             <Label Text="{Binding LoginMessage}"
                    TextColor="Red"
                    FontAttributes="Italic"
                    HorizontalTextAlignment="Center" />
+
+            <Button Text="Login"
+                    WidthRequest="100"
+                    Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />
 
             <Label Text="Create Account"
                    FontSize="14"

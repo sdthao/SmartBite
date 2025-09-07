@@ -2,21 +2,18 @@
 {
     public partial class AppShell : Shell
     {
-        private readonly IServiceProvider _services;
-
-        public AppShell(IServiceProvider services)
+        public AppShell()
         {
             InitializeComponent();
-            _services = services;
 
-            Routing.RegisterRoute("login", typeof(Views.LoginView));
             Routing.RegisterRoute("main", typeof(MainPage));
+            Routing.RegisterRoute("login", typeof(Views.LoginView));
+            Routing.RegisterRoute("aitool", typeof(Views.AIToolView));
+            Routing.RegisterRoute("camera", typeof(Views.CameraView));
+            Routing.RegisterRoute("options", typeof(Views.OptionsView));
+            Routing.RegisterRoute("journal", typeof(Views.UserJournalView));
             Routing.RegisterRoute("register", typeof(Views.RegisterUserView));
-
-            Dispatcher.Dispatch(async () =>
-            {
-                await GoToAsync("login");
-            });
+            Routing.RegisterRoute("editfood", typeof(Views.EditFoodItemsView));
         }
     }
 }

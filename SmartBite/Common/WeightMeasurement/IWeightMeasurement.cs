@@ -1,6 +1,6 @@
-﻿using SmartBite.Common.WeightMeasurement;
+﻿using SmartBite.Common.Measurement;
 
-namespace SmartBite.Common.Measurement
+namespace SmartBite.Common.WeightMeasurement
 {
     public interface IWeightMeasurement : IMeasurementScale
     {

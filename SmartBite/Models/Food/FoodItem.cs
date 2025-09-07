@@ -1,4 +1,6 @@
-﻿using SmartBite.Common.Measurement;
+﻿using SmartBite.Common.WeightMeasurement;
+using SmartBite.Common.CalorieMeasurement;
+using SmartBite.Common.NutrientMeasurement;
 
 namespace SmartBite.Models.Food
 {
@@ -10,9 +12,9 @@ namespace SmartBite.Models.Food
 
         public IWeightMeasurement Weight { get; set; }
 
-        public IList<INutrientMeasurement> FoodNutrients { get; set; }
+        public IList<Vitamin> FoodNutrients { get; set; }
 
-        public FoodItem(string name, ICalorieMeasurement calories, IWeightMeasurement weight, List<INutrientMeasurement> foodNutrients)
+        public FoodItem(string name, ICalorieMeasurement calories, IWeightMeasurement weight, List<Vitamin> foodNutrients)
         {
             Name = string.IsNullOrEmpty(name) ? throw new ArgumentNullException(nameof(name)) : name;
             Calories = calories ?? throw new ArgumentNullException(nameof(calories));

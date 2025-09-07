@@ -1,16 +1,18 @@
 ﻿using MauiIcons.Core;
-using MauiIcons.Material.Outlined;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using NLog;
+using MauiIcons.Material;
+using SmartBite.Extensions;
+using SmartBite.Maui.Views;
+using Syncfusion.Licensing;
+using CommunityToolkit.Maui;
+using SmartBite.Maui.Models;
 using NLog.Extensions.Logging;
 using SmartBite.Maui.ViewModels;
-using SmartBite.Maui.Views;
-using SmartBite.Services;
+using MauiIcons.Material.Outlined;
 using SmartBite.SQLite.Extensions;
-using Syncfusion.Licensing;
+using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Core.Hosting;
 using Syncfusion.Maui.Toolkit.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace SmartBite.Maui
 {
@@ -35,6 +37,8 @@ namespace SmartBite.Maui
             }
 
             builder.UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
+                .UseMaterialMauiIcons()
                 .UseMauiIconsCore(x => { x.SetDefaultIconAutoScaling(true); })
                 .UseMaterialOutlinedMauiIcons()
                 .ConfigureSyncfusionToolkit()
@@ -48,9 +52,8 @@ namespace SmartBite.Maui
 
             RegisterServices(builder.Services);
 
-            LogManager.Setup().LoadConfigurationFromFile("nlog.config");
             builder.Logging.ClearProviders();
-            builder.Logging.AddNLog();
+            builder.Logging.AddNLog("nlog.config");
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -63,19 +66,29 @@ namespace SmartBite.Maui
         {
             var dbPath = Path.Combine(FileSystem.AppDataDirectory, "smartbiteusers.db");
 
+            services.AddCore();
             services.AddSQLite(dbPath);
 
             services.AddSingleton<UserContext>();
 
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MainViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegisterUserViewModel>();
+            services.AddTransient<EditFoodItemsViewModel>();
+            //services.AddTransient<OptionsViewModel>();
+            //services.AddTransient<JournalViewModel>();
+            //services.AddTransient<CameraViewModel>();
+            //services.AddTransient<AIToolViewModel>();
 
 
             services.AddTransient<MainPage>();
             services.AddTransient<LoginView>();
             services.AddTransient<RegisterUserView>();
-            
+            services.AddTransient<EditFoodItemsView>();
+            services.AddTransient<OptionsView>();
+            services.AddTransient<UserJournalView>();
+            services.AddTransient<CameraView>();
+            services.AddTransient<AIToolView>();
         }
     }
 }

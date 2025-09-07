@@ -40,6 +40,10 @@
                Text="{Binding Password}"
                IsPassword="True" />
 
+            <Entry Placeholder="Confirm Password"
+                   Text="{Binding ConfirmedPassword}"
+                   IsPassword="True" />
+
             <Button Text="Create Account"
                 Command="{Binding CreateUserCommand}"
                 IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}" />

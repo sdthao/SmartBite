@@ -1,4 +1,5 @@
 ﻿using SmartBite.Services;
+using SmartBite.Maui.Models;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Mvvm.ComponentModel;

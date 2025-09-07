@@ -5,6 +5,6 @@ namespace SmartBite.Common
         where TIn : class
         where TOut : class
     {
-        IResult<TOut> Map(TIn value);
+        IResult<TOut> Map(TIn value, params object[]? parameter);
     }
 }
