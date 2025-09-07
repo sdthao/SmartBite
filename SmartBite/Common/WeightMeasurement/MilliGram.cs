@@ -1,6 +1,6 @@
-﻿namespace SmartBite.Common.NutrientMeasurement
+﻿namespace SmartBite.Common.WeightMeasurement
 {
-    public record MilliGram(double Value) : IVitaminMeasurement
+    public record MilliGram(double Value) : IWeightMeasurement
     {
         public string Name => "MilliGrams";
 

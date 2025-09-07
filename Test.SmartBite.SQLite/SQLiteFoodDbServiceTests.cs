@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Test.SmartBit.SQLite.Fixtures;
 using SmartBite.Common.WeightMeasurement;
 using SmartBite.Common.CalorieMeasurement;
-using SmartBite.Common.NutrientMeasurement;
+using SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins;
 
 namespace Test.SmartBit.SQLite
 {

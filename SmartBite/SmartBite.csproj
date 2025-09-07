@@ -11,4 +11,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Common\NutrientMeasurement\MicroNutrients\Vitamins\VitaminBComplexes\VitaminB2.cs" />
+    <None Include="Common\NutrientMeasurement\MicroNutrients\Vitamins\VitaminBComplexes\VitaminB9.cs" />
+    <None Include="Common\NutrientMeasurement\MicroNutrients\Vitamins\VitaminBComplexes\VitaminB7.cs" />
+  </ItemGroup>
+
 </Project>

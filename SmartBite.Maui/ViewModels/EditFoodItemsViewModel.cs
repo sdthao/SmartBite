@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 using SmartBite.Common.WeightMeasurement;
 using SmartBite.Common.CalorieMeasurement;
 using CommunityToolkit.Mvvm.ComponentModel;
-using SmartBite.Common.NutrientMeasurement;
+using SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins;
 
 namespace SmartBite.Maui.ViewModels
 {
@@ -212,22 +212,12 @@ namespace SmartBite.Maui.ViewModels
 
             var nutrients = new List<Vitamin>
             {
-                new VitaminA(GetVitaminMeasurement(SelectedVitaminAWeightScale, VitaminA)),
-                new VitaminC(GetVitaminMeasurement(SelectedVitaminCWeightScale, VitaminC)),
-                new VitaminD(GetVitaminMeasurement(SelectedVitaminDWeightScale, VitaminD))
+                new VitaminA(GetWeightMeasurement(SelectedVitaminAWeightScale, VitaminA)),
+                new VitaminC(GetWeightMeasurement(SelectedVitaminCWeightScale, VitaminC)),
+                new VitaminD(GetWeightMeasurement(SelectedVitaminDWeightScale, VitaminD))
             };
 
             return new FoodItem(FoodName, calories, weight, nutrients);
-        }
-
-        private IVitaminMeasurement GetVitaminMeasurement(string scale, double value)
-        {
-            return scale.ToLower() switch
-            {
-                "mcg" => new MicroGram(value),
-                "mg" => new MilliGram(value),
-                _ => throw new InvalidOperationException($"Unknown vitamin scale: {scale}")
-            };
         }
 
         private ICalorieMeasurement GetCalorieMeasurement(string scale, double value)
@@ -250,6 +240,8 @@ namespace SmartBite.Maui.ViewModels
                 "kg" => new KiloGram(value),
                 "oz" => new Ounce(value),
                 "lb" => new Pound(value),
+                "mcg" => new MicroGram(value),
+                "mg" => new MilliGram(value),
                 _ => throw new InvalidOperationException($"Unknown weight scale: {scale}")
             };
         }

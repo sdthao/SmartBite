@@ -28,6 +28,8 @@ namespace SmartBite.Common.Converters
 
             return symbol.ToLower() switch
             {
+                "mg" => new MilliGram(value.Value),
+                "mcg" => new MicroGram(value.Value),
                 "g" => new Gram(value.Value),
                 "kg" => new KiloGram(value.Value),
                 "oz" => new Ounce(value.Value),

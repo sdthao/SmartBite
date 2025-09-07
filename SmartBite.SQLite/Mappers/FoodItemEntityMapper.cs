@@ -4,7 +4,7 @@ using SmartBite.Models.Food;
 using SmartBite.SQLite.Models;
 using SmartBite.Common.WeightMeasurement;
 using SmartBite.Common.CalorieMeasurement;
-using SmartBite.Common.NutrientMeasurement;
+using SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins;
 
 namespace SmartBite.SQLite.Mappers
 {

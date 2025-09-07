@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SmartBite.Common.NutrientMeasurement;
+using SmartBite.Common.WeightMeasurement;
+using SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins;
+using SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins.VitaminBComplexes;
 
 namespace SmartBite.Common.Converters
 {
@@ -30,7 +32,7 @@ namespace SmartBite.Common.Converters
 
             var symbol = measurementObject["Symbol"]?.ToString();
 
-            IVitaminMeasurement measurement;
+            IWeightMeasurement measurement;
 
             switch (symbol)
             {
@@ -47,18 +49,18 @@ namespace SmartBite.Common.Converters
             return name switch
             {
                 "Vitamin A" => new VitaminA(measurement),
-                //"Vitamin B1" => new VitaminB1(measurement),
-                //"Vitamin B2" => new VitaminB2(measurement),
-                //"Vitamin B3" => new VitaminB3(measurement),
-                //"Vitamin B5" => new VitaminB5(measurement),
-                //"Vitamin B6" => new VitaminB6(measurement),
-                //"Vitamin B7" => new VitaminB7(measurement),
-                //"Vitamin B9" => new VitaminB9(measurement),
-                //"Vitamin B12" => new VitaminB12(measurement),
+                "Vitamin B1" => new VitaminB1(measurement),
+                "Vitamin B2" => new VitaminB2(measurement),
+                "Vitamin B3" => new VitaminB3(measurement),
+                "Vitamin B5" => new VitaminB5(measurement),
+                "Vitamin B6" => new VitaminB6(measurement),
+                "Vitamin B7" => new VitaminB7(measurement),
+                "Vitamin B9" => new VitaminB9(measurement),
+                "Vitamin B12" => new VitaminB12(measurement),
                 "Vitamin C" => new VitaminC(measurement),
                 "Vitamin D" => new VitaminD(measurement),
-                //"Vitamin E" => new VitaminE(measurement),
-                //"Vitamin K" => new VitaminK(measurement),
+                "Vitamin E" => new VitaminE(measurement),
+                "Vitamin K" => new VitaminK(measurement),
                 _ => throw new NotSupportedException($"Unsupported vitamin name: {name}")
             };
         }

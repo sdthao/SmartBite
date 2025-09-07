@@ -1,4 +1,6 @@
-﻿namespace SmartBite.Common.NutrientMeasurement
+﻿using SmartBite.Common.WeightMeasurement;
+
+namespace SmartBite.Common.NutrientMeasurement.MicroNutrients.Vitamins
 {
     public abstract class Vitamin
     {
@@ -10,9 +12,9 @@
         /// <summary>
         /// The measurement of the vitamin.
         /// </summary>
-        public IVitaminMeasurement Measurement { get; }
+        public IWeightMeasurement Measurement { get; }
 
-        protected Vitamin(string name, IVitaminMeasurement measurement)
+        protected Vitamin(string name, IWeightMeasurement measurement)
         {
             Name = string.IsNullOrEmpty(name) ? throw new ArgumentNullException(nameof(name)) : name;
             
