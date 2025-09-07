@@ -18,11 +18,11 @@ SmartBite is a food tracking app designed to help you monitor your nutritional i
 Follow these steps to set up and run the project locally.
 
 ### Prerequisites
-.NET 8.0 SDK: The latest version of the .NET SDK.
+**.NET 8.0 SDK:** The latest version of the .NET SDK.
 
-Visual Studio 2022: With the .NET Multi-platform App UI development workload installed.
+**Visual Studio 2022:** With the .NET Multi-platform App UI development workload installed.
 
-Syncfusion License: A valid license key is required to use Syncfusion components. You can obtain a free community license if you meet the eligibility criteria.
+**[Syncfusion License](https://www.syncfusion.com/):** A valid license key is required to use Syncfusion components. You can obtain a free community license if you meet the eligibility criteria. 
 
 ### Clone the Repository
 ```
